@@ -25,7 +25,8 @@ def register(app: typer.Typer) -> None:
             console.print("[yellow]No books yet.[/yellow]")
             return
         for book in books:
-stale = len(book.stale_page_ids or [])
+            stale = len(book.stale_page_ids or [])
+
             stale_label = f" [red]({stale} stale)[/red]" if stale else ""
             console.print(
                 f"[bold]{book.title or '(untitled)'}[/bold]  "
