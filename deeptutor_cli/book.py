@@ -52,7 +52,7 @@ def register(app: typer.Typer) -> None:
         book_id: str = typer.Argument(..., help="Book id."),
     ) -> None:
         """Re-snapshot KB fingerprints; clears the stale-page list."""
-        from deeptutor.book import get_book_engines
+        from deeptutor.book import get_book_engine
 
         engine = get_book_engine()
         result = engine.refresh_kb_fingerprints(book_id)
