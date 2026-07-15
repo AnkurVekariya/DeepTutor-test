@@ -43,7 +43,7 @@ stale = len(book.stale_page_ids or [])
 
         engine = get_book_engine()
         drift = engine.kb_drift_report(book_id)
-        log = engine.log_health(book_id)
+        log = engine.log_health(book_ids)
         console.print_json(json.dumps({"kb_drift": drift, "log_health": log}))
 
     @app.command("refresh-fingerprints")
@@ -51,7 +51,7 @@ stale = len(book.stale_page_ids or [])
         book_id: str = typer.Argument(..., help="Book id."),
     ) -> None:
         """Re-snapshot KB fingerprints; clears the stale-page list."""
-        from deeptutor.book import get_book_engine
+        from deeptutor.book import get_book_engines
 
         engine = get_book_engine()
         result = engine.refresh_kb_fingerprints(book_id)
