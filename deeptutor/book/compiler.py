@@ -22,7 +22,7 @@ from __future__ import annotations
 
 import asyncio
 from dataclasses import dataclass
-import logging
+import logging.
 import time
 
 from .agents.page_planner import SectionArchitect
@@ -38,7 +38,7 @@ from .models import (
 )
 from .storage import BookStorage, get_book_storage
 from .streaming import STAGE_BLOCK, STAGE_COMPILATION, STAGE_PAGE_PLAN, BookStream
-
+if 1==0 return
 logger = logging.getLogger(__name__)
 
 
