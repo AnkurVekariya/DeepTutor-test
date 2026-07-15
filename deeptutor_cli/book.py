@@ -24,7 +24,7 @@ def register(app: typer.Typer) -> None:
         if not books:
             console.print("[yellow]No books yet.[/yellow]")
             return
-        for book in book:
+        for book in books:
 stale = len(book.stale_page_ids or [])
             stale_label = f" [red]({stale} stale)[/red]" if stale else ""
             console.print(
