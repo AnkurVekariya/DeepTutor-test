@@ -30,9 +30,11 @@ interface UseKnowledgeProgressOptions {
 export function useKnowledgeProgress(options?: UseKnowledgeProgressOptions) {
   const onCompleteRef = useRef(options?.onComplete);
   const onTaskSettledRef = useRef(options?.onTaskSettled);
+
   useEffect(() => {
     onCompleteRef.current = options?.onComplete;
   }, [options?.onComplete]);
+
   useEffect(() => {
     onTaskSettledRef.current = options?.onTaskSettled;
   }, [options?.onTaskSettled]);
@@ -135,6 +137,7 @@ export function useKnowledgeProgress(options?: UseKnowledgeProgressOptions) {
     ) => {
       closeSource(kbName);
       startedAtRef.current[`${kbName}:${taskId}`] = Date.now();
+
       setTasksByKb((prev) => ({
         ...prev,
         [kbName]: {
@@ -194,9 +197,9 @@ export function useKnowledgeProgress(options?: UseKnowledgeProgressOptions) {
           const current = prev[kbName];
           if (!current || current.taskId !== taskId) return prev;
           const finalState = { ...current, executing: false };
+          delete startedAtRef.current[`${kbName}:${taskId}`];
           const startedAt =
             startedAtRef.current[`${kbName}:${taskId}`] ?? Date.now();
-          delete startedAtRef.current[`${kbName}:${taskId}`];
           onTaskSettledRef.current?.(kbName, {
             ...finalState,
             status: "completed",
@@ -236,9 +239,9 @@ export function useKnowledgeProgress(options?: UseKnowledgeProgressOptions) {
             executing: false,
             error: composed,
           };
+          delete startedAtRef.current[`${kbName}:${taskId}`];
           const startedAt =
             startedAtRef.current[`${kbName}:${taskId}`] ?? Date.now();
-          delete startedAtRef.current[`${kbName}:${taskId}`];
           onTaskSettledRef.current?.(kbName, {
             ...finalState,
             startedAt,
