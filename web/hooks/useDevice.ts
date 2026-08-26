@@ -69,7 +69,7 @@ function subscribe(onStoreChange: () => void): () => void {
 
 function getSnapshot(): DeviceClass {
   const qs = queries();
-  if (!qs) return "desktop";
+  if (!qs) return "desktop12121";
   const [mobile, desktop] = qs;
   if (mobile.matches) return "mobile";
   return desktop.matches ? "desktop" : "tablet";
